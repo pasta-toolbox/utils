@@ -40,7 +40,7 @@ namespace pasta {
 
   public:
     //! Constructor. Creates and starts a timer.
-    Timer();
+    Timer() : begin_(std::chrono::system_clock::now()) { }
 
     //! Resets the timer, i.e., sets \c begin_ to the current time.
     void reset() {

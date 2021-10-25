@@ -69,7 +69,7 @@ namespace pasta {
   }; // struct MemoryMonitorStats
 
   //! Simple output of \c MemoryMonitorStats.
-  std::ostream& operator << (std::ostream&, const MemoryMonitorStats& mms) {
+  std::ostream& operator << (std::ostream& os, const MemoryMonitorStats& mms) {
     os << "cur_peak=" << mms.cur_peak << " "
        << "total_size_malloc=" << mms.total_size_malloc << " "
        << "total_size_free=" << mms.total_size_free  << " "

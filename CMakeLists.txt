@@ -25,10 +25,17 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 project(pasta_utils)
 
+# Add tlx subdirectory only, if it has not been added by another project already
+if(NOT TARGET tlx)
+  add_subdirectory(extlib/tlx)
+endif()
+
 # pasta::memory_monitor
 add_library(pasta_memory_monitor OBJECT
   utils/malloc.cpp)
-target_include_directories(pasta_memory_monitor INTERFACE
+target_link_libraries(pasta_memory_monitor PUBLIC
+  tlx)
+target_include_directories(pasta_memory_monitor PUBLIC
   ${CMAKE_CURRENT_SOURCE_DIR})
 
 # pasta::utils interface definitions
