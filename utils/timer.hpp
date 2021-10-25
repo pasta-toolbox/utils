@@ -43,21 +43,31 @@ namespace pasta {
     Timer();
 
     //! Resets the timer, i.e., sets \c begin_ to the current time.
-    void reset();
+    void reset() {
+      begin_ = std::chrono::system_clock::now();
+    }
 
     /*!
      * \brief Computes duration of timer up to this point.
      * \return The duration the timer has been running in milliseconds.
      */
     [[nodiscard]]
-    size_t get() const;
+    size_t get() const {
+      auto const end = std::chrono::system_clock::now();
+      return std::chrono::duration_cast<
+	std::chrono::milliseconds>(end - begin_).count();
+    }
 
     /*!
      * \brief Computes duration of timer up to this point and calls \c reset.
      * \return The duration the timer has been running in milliseconds.
      */
     [[nodiscard]]
-    size_t get_and_reset();
+    size_t get_and_reset() {
+      auto const time = get();
+      reset();
+      return time;
+    }
   }; // class Timer
 
   //! \)
