@@ -33,10 +33,10 @@ namespace pasta {
 
   //! Macro used to define our assertions in debug builds.
   #ifdef DEBUG
-  #define PASTA_ASSERT(assertion, message)	\
-    pasta::pasta_assert_impl(assertion, message);
+  #define PASTA_ASSERT(condition, message)	\
+    pasta::pasta_assert_impl(condition, message);
   #else // NDEBUG
-  #define PASTA_ASSERT(assertion, message)
+  #define PASTA_ASSERT(condition, message)
   #endif
 
   
@@ -48,7 +48,8 @@ namespace pasta {
    * \param location Source location of the assertion, default parameter.
    */
   void pasta_assert_impl(bool const condition, std::string_view const message,
-			 std::source_location const location) {
+			 std::source_location const location =
+			 std::source_location::current()) {
     if (!condition) {
       #ifdef has_source_location
       std::cerr << "Assertion failed in file: "
