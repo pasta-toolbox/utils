@@ -23,7 +23,7 @@
 #include <iterator>
 #include <utility>
 
-#include "common/histogram.hpp"
+#include "utils/histogram.hpp"
 
 namespace pasta {
 
@@ -97,7 +97,7 @@ namespace pasta {
   template <std::forward_iterator Iterator>
   requires SmallAlphabet<std::iter_value_t<Iterator>>
   size_t reduce_alphabet(Iterator begin, Iterator end,
-			 Histogram<Iterator> const& histogram,
+			 Histogram<Iterator>& histogram,
 			 PlainHist<Iterator>* alphabet_mapping_out = nullptr,
 			 size_t smallest_symbol = 0) {
     for (auto& occ : histogram) {
