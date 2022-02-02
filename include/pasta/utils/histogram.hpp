@@ -27,7 +27,7 @@
 
 #include <tlx/define.hpp>
 
-#include "concepts/alphabet.hpp"
+#include "pasta/utils/concepts/alphabet.hpp"
 
 namespace pasta {
 

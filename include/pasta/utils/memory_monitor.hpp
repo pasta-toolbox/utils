@@ -24,7 +24,7 @@
 #include <ostream>
 #include <iostream>
 
-#include "utils/malloc.hpp"
+#include "pasta/utils/malloc.hpp"
 
 namespace pasta {
 

@@ -32,15 +32,15 @@ endif()
 
 # pasta::memory_monitor
 add_library(pasta_memory_monitor OBJECT
-  utils/malloc.cpp)
+  include/pasta/utils/malloc.cpp)
 target_link_libraries(pasta_memory_monitor PUBLIC
   tlx)
 target_include_directories(pasta_memory_monitor PUBLIC
-  ${CMAKE_CURRENT_SOURCE_DIR})
+  ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 # pasta::utils interface definitions
 add_library(pasta_utils INTERFACE)
 target_include_directories(pasta_utils INTERFACE
-  ${CMAKE_CURRENT_SOURCE_DIR})
+  ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 ################################################################################

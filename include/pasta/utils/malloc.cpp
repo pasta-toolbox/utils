@@ -22,7 +22,7 @@
 #include <cstring>
 #include <cstdio>
 
-#include "utils/malloc.hpp"
+#include "pasta/utils/malloc.hpp"
 
 #include <iostream>
 

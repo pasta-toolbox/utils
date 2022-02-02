@@ -23,7 +23,7 @@
 #include <iterator>
 #include <utility>
 
-#include "utils/histogram.hpp"
+#include "pasta/utils/histogram.hpp"
 
 namespace pasta {
 
