@@ -25,7 +25,7 @@
 
 #pragma once
 
-#define PASTA_DO_NOT_OPTIMIZE(value) asm volatile \
-                                     ("" : : "r,m"(value) : "memory");
-  
+#define PASTA_DO_NOT_OPTIMIZE(value)                                           \
+  asm volatile("" : : "r,m"(value) : "memory");
+
 /******************************************************************************/

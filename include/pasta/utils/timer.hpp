@@ -24,54 +24,51 @@
 
 namespace pasta {
 
-  //! \addtogroup pasta_util
-  //! \{
+//! \addtogroup pasta_util
+//! \{
+
+/*!
+ * \brief Utility wrapper for chrono timer.
+ *
+ * This small timer utility can be used to measure running times. It provided
+ * more functionality than simply computing two \c time_points.
+ */
+class Timer {
+  //! Time when the timer was created or reset.
+  std::chrono::system_clock::time_point begin_;
+
+public:
+  //! Constructor. Creates and starts a timer.
+  Timer() : begin_(std::chrono::system_clock::now()) {}
+
+  //! Resets the timer, i.e., sets \c begin_ to the current time.
+  void reset() {
+    begin_ = std::chrono::system_clock::now();
+  }
 
   /*!
-   * \brief Utility wrapper for chrono timer.
-   *
-   * This small timer utility can be used to measure running times. It provided
-   * more functionality than simply computing two \c time_points.
+   * \brief Computes duration of timer up to this point.
+   * \return The duration the timer has been running in milliseconds.
    */
-  class Timer {
+  [[nodiscard]] size_t get() const {
+    auto const end = std::chrono::system_clock::now();
+    return std::chrono::duration_cast<std::chrono::milliseconds>(end - begin_)
+        .count();
+  }
 
-    //! Time when the timer was created or reset.
-    std::chrono::system_clock::time_point begin_;
+  /*!
+   * \brief Computes duration of timer up to this point and calls \c reset.
+   * \return The duration the timer has been running in milliseconds.
+   */
+  [[nodiscard]] size_t get_and_reset() {
+    auto const time = get();
+    reset();
+    return time;
+  }
+}; // class Timer
 
-  public:
-    //! Constructor. Creates and starts a timer.
-    Timer() : begin_(std::chrono::system_clock::now()) { }
-
-    //! Resets the timer, i.e., sets \c begin_ to the current time.
-    void reset() {
-      begin_ = std::chrono::system_clock::now();
-    }
-
-    /*!
-     * \brief Computes duration of timer up to this point.
-     * \return The duration the timer has been running in milliseconds.
-     */
-    [[nodiscard]]
-    size_t get() const {
-      auto const end = std::chrono::system_clock::now();
-      return std::chrono::duration_cast<
-	std::chrono::milliseconds>(end - begin_).count();
-    }
-
-    /*!
-     * \brief Computes duration of timer up to this point and calls \c reset.
-     * \return The duration the timer has been running in milliseconds.
-     */
-    [[nodiscard]]
-    size_t get_and_reset() {
-      auto const time = get();
-      reset();
-      return time;
-    }
-  }; // class Timer
-
-  //! \)
+//! \)
 
 } // namespace pasta
-  
+
 /******************************************************************************/

@@ -31,51 +31,46 @@
 
 namespace pasta {
 
-  //! Macro used to define our assertions in debug builds.
-  #ifdef DEBUG
-  #define PASTA_ASSERT(condition, message)	\
+//! Macro used to define our assertions in debug builds.
+#ifdef DEBUG
+#  define PASTA_ASSERT(condition, message)                                     \
     pasta::pasta_assert_impl(condition, message);
-  #else // NDEBUG
-  #define PASTA_ASSERT(condition, message)
-  #endif
+#else // NDEBUG
+#  define PASTA_ASSERT(condition, message)
+#endif
 
-  
-  /*!
-   * \brief Custom assert function, which we can add more functionality to,
-   * compared with the default cassert.
-   * \param condition Condition that is checked w.r.t. the assertion.
-   * \param message Message that is printed if assertion fails.
-   * \param location Source location of the assertion, default parameter.
-   */
-  #ifdef has_source_location
-  void pasta_assert_impl(bool const condition, std::string_view const message,
-			 std::source_location const location =
-			 std::source_location::current()) {
-  #else
-      void pasta_assert_impl(bool const condition,
-			     std::string_view const message) {
-  #endif
-    if (!condition) {
-      #ifdef has_source_location
-      std::cerr << "Assertion failed in file: "
-		<< location.file_name() << "("
-		<< location.line() << ":"
-		<< location.column() << ") "
-		<< location.function_name() << "'";
-      #else
-      std::cerr << "Assertion failed in file: "
-		<< __FILE__ << "(line "
-		<< __LINE__ << ") "
-		<< __FUNCTION__ << "'";
-      #endif
-      if (message.size() > 0) {
-	std::cerr << " with message: " << message;
-      }
-      std::cerr << std::endl;
-      std::abort();
+/*!
+ * \brief Custom assert function, which we can add more functionality to,
+ * compared with the default cassert.
+ * \param condition Condition that is checked w.r.t. the assertion.
+ * \param message Message that is printed if assertion fails.
+ * \param location Source location of the assertion, default parameter.
+ */
+#ifdef has_source_location
+void pasta_assert_impl(
+    bool const condition,
+    std::string_view const message,
+    std::source_location const location = std::source_location::current()) {
+#else
+void pasta_assert_impl(bool const condition, std::string_view const message) {
+#endif
+  if (!condition) {
+#ifdef has_source_location
+    std::cerr << "Assertion failed in file: " << location.file_name() << "("
+              << location.line() << ":" << location.column() << ") "
+              << location.function_name() << "'";
+#else
+    std::cerr << "Assertion failed in file: " << __FILE__ << "(line "
+              << __LINE__ << ") " << __FUNCTION__ << "'";
+#endif
+    if (message.size() > 0) {
+      std::cerr << " with message: " << message;
     }
+    std::cerr << std::endl;
+    std::abort();
   }
-  
+}
+
 } // namespace pasta
 
 /******************************************************************************/
