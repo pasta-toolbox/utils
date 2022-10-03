@@ -32,7 +32,7 @@ endif()
 
 # pasta::memory_monitor
 add_library(pasta_memory_monitor OBJECT
-  include/pasta/utils/malloc.cpp)
+  include/pasta/utils/benchmark/malloc.cpp)
 target_link_libraries(pasta_memory_monitor PUBLIC
   tlx)
 target_include_directories(pasta_memory_monitor PUBLIC

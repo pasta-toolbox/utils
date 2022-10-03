@@ -20,7 +20,7 @@
 
 #pragma once
 
-#include "pasta/utils/malloc.hpp"
+#include "pasta/utils/benchmark/malloc.hpp"
 
 #include <cstddef>
 #include <iostream>
