@@ -1,5 +1,5 @@
 /*******************************************************************************
- * utils/malloc.cpp
+ * This file is part of pasta::utils.
  *
  * Copyright (C) 2021 Florian Kurpicz <florian@kurpicz.org>
  *

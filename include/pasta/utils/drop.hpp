@@ -1,5 +1,5 @@
 /*******************************************************************************
- * pasta/utils/drop.hpp
+ * This file is part of pasta::utils.
  *
  * Copyright (C) 2022 Florian Kurpicz <florian@kurpicz.org>
  *

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * pasta/utils/debug_asserts.hpp
+ * This file is part of pasta::utils.
  *
  * Copyright (C) 2021 Florian Kurpicz <florian@kurpicz.org>
  *
