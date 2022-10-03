@@ -21,6 +21,7 @@
 #pragma once
 
 #include <string_view>
+#include <iostream>
 
 #ifdef __has_include
 #  if __has_include(<source_location>)

@@ -23,6 +23,7 @@
 #include "pasta/utils/debug_asserts.hpp"
 
 #include <cstddef>
+#include <cstdlib>
 
 namespace pasta {
 
