@@ -25,12 +25,12 @@
 
 namespace pasta {
 
-  template <typename Type>
-  concept Alphabet = std::unsigned_integral<Type>;
+template <typename Type>
+concept Alphabet = std::unsigned_integral<Type>;
 
-  template <typename Type>
-  concept SmallAlphabet =
-    Alphabet<Type> && std::numeric_limits<Type>::max() <= 65536;
+template <typename Type>
+concept SmallAlphabet = Alphabet<Type> && std::numeric_limits<Type>::max()
+<= 65536;
 
 } // namespace pasta
 

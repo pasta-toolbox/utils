@@ -24,35 +24,35 @@
 
 namespace pasta {
 
-  /*!
-   * \brief Deleted utility function to drop reference (end its lifetime). This
-   * only works with rvalue references. \tparam T Type of element to be dropped.
-   */
-  template <typename T>
-  void drop(T&) = delete;
+/*!
+ * \brief Deleted utility function to drop reference (end its lifetime). This
+ * only works with rvalue references. \tparam T Type of element to be dropped.
+ */
+template <typename T>
+void drop(T&) = delete;
 
-  /*!
-   * \brief Deleted utility function to drop reference (end its lifetime). This
-   * only works with rvalue references. \tparam T Type of element to be dropped.
-   */
-  template <typename T>
-  void drop(T const&) = delete;
+/*!
+ * \brief Deleted utility function to drop reference (end its lifetime). This
+ * only works with rvalue references. \tparam T Type of element to be dropped.
+ */
+template <typename T>
+void drop(T const&) = delete;
 
-  /*!
-   * \brief Deleted utility function to drop reference (end its lifetime).
-   * \tparam T Type of element to be dropped.
-   * \param to_drop Element to be dropped.
-   */
-  template <typename T>
-  void drop(T && to_drop) {
-    std::remove_reference_t<T>(std::move(to_drop));
-  }
+/*!
+ * \brief Deleted utility function to drop reference (end its lifetime).
+ * \tparam T Type of element to be dropped.
+ * \param to_drop Element to be dropped.
+ */
+template <typename T>
+void drop(T&& to_drop) {
+  std::remove_reference_t<T>(std::move(to_drop));
+}
 
-  /*!
-   * \brief Deleted utility function to drop reference (end its lifetime). This
-   * only works with rvalue references. \tparam T Type of element to be dropped.
-   */
-  template <typename T>
-  void drop(T const&&) = delete;
+/*!
+ * \brief Deleted utility function to drop reference (end its lifetime). This
+ * only works with rvalue references. \tparam T Type of element to be dropped.
+ */
+template <typename T>
+void drop(T const&&) = delete;
 
 } // namespace pasta
