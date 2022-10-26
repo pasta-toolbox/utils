@@ -22,6 +22,7 @@
 
 #include "pasta/utils/debug_asserts.hpp"
 
+#include <bit>
 #include <cstddef>
 #include <cstdlib>
 
@@ -36,9 +37,14 @@ namespace pasta {
  */
 template <size_t alignment, typename DataType>
 class AlignedVector {
+  static_assert(std::has_single_bit(alignment),
+                "Alignement has to be power of two.");
+
 private:
   //! Number of elements that can be stored in the vector.
   size_t size_;
+  //! Number of allocated bytes (have to be a multiple of alignment).
+  size_t allocated_bytes_;
   //! Pointer to the first element of the vector.
   DataType* data_;
 
@@ -54,8 +60,9 @@ public:
    */
   AlignedVector(size_t const size)
       : size_(size),
+        allocated_bytes_(required_byte_size(size_)),
         data_(static_cast<DataType*>(
-            std::aligned_alloc(alignment, sizeof(DataType) * size))) {
+            std::aligned_alloc(alignment, allocated_bytes_))) {
     PASTA_ASSERT((sizeof(DataType) * size) % alignment == 0,
                  "Allocted memory has to be a multiple of template parameter "
                  "alignment.");
@@ -143,6 +150,21 @@ public:
           std::aligned_alloc(alignment, sizeof(DataType) * size));
       size_ = size;
     }
+  }
+
+private:
+  /*!
+   * \brief Compute the number of bytes that have to be allocated to be a
+   * multiple of \c alignment. \param size The number of objects that can be
+   * stored in the vector. \return The size that has to be allocated to make the
+   * real size of this vector a multiple of \c alignment.
+   */
+  size_t required_byte_size(size_t const size) const {
+    size_t required_bytes = size * sizeof(DataType);
+    if (required_bytes % alignment != 0) {
+      required_bytes += (alignment - (required_bytes % alignment));
+    }
+    return required_bytes;
   }
 };
 } // namespace pasta
