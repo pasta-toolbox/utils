@@ -18,17 +18,22 @@
 #
 ################################################################################
 
-cmake_minimum_required(VERSION 3.4.1 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.24 FATAL_ERROR)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+include(FetchContent)
+
 project(pasta_utils)
 
-# Add tlx subdirectory only, if it has not been added by another project already
-if(NOT TARGET tlx)
-  add_subdirectory(extlib/tlx)
-endif()
+FetchContent_Declare(
+  tlx
+  GIT_REPOSITORY https://github.com/tlx/tlx.git
+  GIT_TAG        b6af589 #release 0.6.1
+)
+
+FetchContent_MakeAvailable(tlx)
 
 # pasta::memory_monitor
 add_library(pasta_memory_monitor OBJECT
