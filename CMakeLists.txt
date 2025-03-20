@@ -30,7 +30,7 @@ project(pasta_utils)
 FetchContent_Declare(
   tlx
   GIT_REPOSITORY https://github.com/tlx/tlx.git
-  GIT_TAG        cf83363
+  GIT_TAG        2dd63ab
 )
 
 FetchContent_MakeAvailable(tlx)
