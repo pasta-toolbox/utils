@@ -48,12 +48,12 @@ namespace pasta {
  * \param location Source location of the assertion, default parameter.
  */
 #ifdef has_source_location
-void pasta_assert_impl(
+static void pasta_assert_impl(
     bool const condition,
     std::string_view const message,
     std::source_location const location = std::source_location::current()) {
 #else
-void pasta_assert_impl(bool const condition, std::string_view const message) {
+static void pasta_assert_impl(bool const condition, std::string_view const message) {
 #endif
   if (!condition) {
 #ifdef has_source_location
